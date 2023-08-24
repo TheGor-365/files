@@ -4,8 +4,18 @@
 
 <%= render @book %>
 
-<div class="button-group">
-  <%= link_to "Edit this book", edit_book_path(@book), , class: 'btn btn-sm btn-outline-warning' %>
-  <%= link_to "Back to books", books_path, , class: 'btn btn-sm btn-outline-secondary' %>
-  <%= button_to "Destroy this book", @book, method: :delete, , class: 'btn btn-sm btn-outline-danger' %>
+<% @book.images.each do |image| %>
+  <%#= image_tag rails_blob_path(image), width: 200, height: 200 %>
+  <%#= link_to rails_blob_path(image, disposition: "attachment"), width: 200, height: 200 %>
+  <%= image_tag url_for(image), width: 200, height: 200 %>
+  <%#= image_tag image.variant(resize_to_limit: [400, 400]) %>
+  <%#= image_tag image.preview(resize_to_limit: [400, 400]) %>
+<% end %>
+
+<br>
+
+<div class="btn-group my-3">
+  <%= link_to "Edit this book", edit_book_path(@book), class: 'btn btn-sm btn-outline-warning' %>
+  <%= link_to "Back to books", books_path, class: 'btn btn-sm btn-outline-secondary' %>
+  <%= button_to "Destroy this book", @book, method: :delete, class: 'btn btn-sm btn-outline-danger' %>
 </div>
